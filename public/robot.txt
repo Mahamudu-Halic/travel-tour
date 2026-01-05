@@ -1,0 +1,18 @@
+# BESEPA Eco-Culture & Tourism Hub robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /book/
+Disallow: /_next/
+
+# Allow specific crawlers for better indexing
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://besepa.vercel.app/sitemap.xml
