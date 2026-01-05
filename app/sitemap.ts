@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 export default async function sitemap() {
   const supabase = await createClient();
 
-  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL;
 
   // Static pages
   const staticPages = [

@@ -86,9 +86,7 @@ export async function POST(request: Request) {
           email: email,
           amount: Math.round(totalAmount * 100), // Paystack amount in kobo (GHS cents)
           reference: bookingReference,
-          callback_url: `${
-            process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"
-          }/api/bookings/verify?reference=${bookingReference}`,
+          callback_url: `${process.env.NEXT_PUBLIC_URL}/api/bookings/verify?reference=${bookingReference}`,
           metadata: {
             booking_id: booking.id,
             tour_slug: tourSlug,
