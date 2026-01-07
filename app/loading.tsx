@@ -1,3 +1,5 @@
+import MainLoader from "@/components/loaders/main-loader";
+
 export default function Loading() {
-  return <div className="text-4xl font-bold text-red-500">Loading...</div>;
+  return <MainLoader />;
 }

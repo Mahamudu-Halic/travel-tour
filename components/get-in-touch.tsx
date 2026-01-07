@@ -14,7 +14,7 @@ const GetInTouch = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild size="lg" className="bg-amber-600 hover:bg-amber-700">
-            <Link href="/book">Book an Experience</Link>
+            <Link href="/tours">Book an Experience</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
             <Link href="/contact">Contact Us</Link>

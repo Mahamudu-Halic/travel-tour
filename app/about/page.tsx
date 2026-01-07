@@ -7,7 +7,7 @@ const page = () => {
   return (
     <div>
       <section className="relative py-24 bg-linear-to-br from-amber-50 to-green-50">
-        <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent z-1" />
+        {/* <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent z-1" /> */}
         <Image
           src={"assets/images/Section (1).svg"}
           alt="home"
@@ -17,8 +17,8 @@ const page = () => {
           fill
           className="object-cover w-full h-full absolute top-0 left-0 z-0"
         />
-        <div className="max-w-7xl relative z-2 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-7xl relative z-2  px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl  ">
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
               Who We Are
             </h1>

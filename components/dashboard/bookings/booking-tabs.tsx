@@ -5,6 +5,7 @@ import Link from "next/link";
 import BookingCard from "./booking-card";
 import { BookingsType } from "./types";
 import { ToursType } from "@/components/tours/types";
+import Empty from "@/components/empty";
 
 const BookingTabs = ({
   allBookings,
@@ -29,15 +30,15 @@ const BookingTabs = ({
   return (
     <Tabs defaultValue="all" className="w-full">
       <TabsList className="mb-6 bg-background">
-        <TabsTrigger value="all">All ({allBookings?.length || 0})</TabsTrigger>
+        <TabsTrigger value="all">All ({allBookings?.length ?? 0})</TabsTrigger>
         <TabsTrigger value="upcoming">
-          Upcoming ({upcomingBookings?.length || 0})
+          Upcoming ({upcomingBookings?.length ?? 0})
         </TabsTrigger>
         <TabsTrigger value="past">
-          Past ({pastBookings?.length || 0})
+          Past ({pastBookings?.length ?? 0})
         </TabsTrigger>
         <TabsTrigger value="pending">
-          Pending ({pendingBookings?.length || 0})
+          Pending ({pendingBookings?.length ?? 0})
         </TabsTrigger>
       </TabsList>
 
@@ -49,7 +50,7 @@ const BookingTabs = ({
         ) : (
           <Card className="border-border/50">
             <CardContent className="py-16 text-center">
-              <p className="mb-4 text-muted-foreground">No bookings found</p>
+              <Empty message="No bookings found"/>
               <Button asChild>
                 <Link href="/tours">Browse Tours</Link>
               </Button>
@@ -66,7 +67,7 @@ const BookingTabs = ({
         ) : (
           <Card className="border-border/50">
             <CardContent className="py-16 text-center">
-              <p className="mb-4 text-muted-foreground">No upcoming bookings</p>
+              <Empty message="No upcoming bookings found"/>
               <Button asChild>
                 <Link href="/tours">Browse Tours</Link>
               </Button>
@@ -83,7 +84,7 @@ const BookingTabs = ({
         ) : (
           <Card className="border-border/50">
             <CardContent className="py-16 text-center">
-              <p className="text-muted-foreground">No past bookings</p>
+              <Empty message="No past bookings found"/>
             </CardContent>
           </Card>
         )}
@@ -97,7 +98,7 @@ const BookingTabs = ({
         ) : (
           <Card className="border-border/50">
             <CardContent className="py-16 text-center">
-              <p className="text-muted-foreground">No pending bookings</p>
+              <Empty message="No pending bookings found"/>
             </CardContent>
           </Card>
         )}

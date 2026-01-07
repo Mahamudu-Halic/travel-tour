@@ -9,7 +9,6 @@ import {
 import { BookingsType } from "./types";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 const BookingActions = ({
   booking,
