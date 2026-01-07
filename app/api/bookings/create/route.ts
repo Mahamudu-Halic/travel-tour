@@ -1,3 +1,4 @@
+import { paystackAPI } from "@/apis/paystack";
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
@@ -38,10 +39,10 @@ export async function POST(request: Request) {
       .insert({
         user_id: user.id,
         tour_id: tourId,
-        booking_reference: bookingReference,
         number_of_participants: participants,
         start_date: startDate,
         total_amount: totalAmount,
+        booking_reference: bookingReference,
         payment_status: "pending",
         booking_status: "pending",
         customer_name: fullName,
@@ -74,28 +75,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const paystackResponse = await fetch(
-      "https://api.paystack.co/transaction/initialize",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${paystackSecretKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          amount: Math.round(totalAmount * 100), // Paystack amount in kobo (GHS cents)
-          reference: bookingReference,
-          callback_url: `${process.env.NEXT_PUBLIC_URL}/api/bookings/verify?reference=${bookingReference}`,
-          metadata: {
-            booking_id: booking.id,
-            tour_slug: tourSlug,
-            customer_name: fullName,
-            participants: participants,
-          },
-        }),
-      }
-    );
+    const paystackResponse = await paystackAPI({
+      email: email,
+      amount: Math.round(totalAmount * 100),
+      reference: bookingReference,
+      callback_url: `${process.env.NEXT_PUBLIC_URL}/api/bookings/verify?reference=${bookingReference}`,
+      metadata: {
+        booking_id: booking.id,
+        tour_slug: tourSlug,
+        customer_name: fullName,
+        participants: participants,
+      },
+    });
 
     const paystackData = await paystackResponse.json();
 

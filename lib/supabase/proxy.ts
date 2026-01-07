@@ -37,18 +37,27 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // Protected routes
-  if (!user && request.nextUrl.pathname.startsWith("/dashboard")) {
+  if (
+    !user &&
+    (request.nextUrl.pathname.startsWith("/dashboard") ||
+      request.nextUrl.pathname.startsWith("/admin"))
+  ) {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     return NextResponse.redirect(url);
   }
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user?.id)
+    .single();
+
   // Admin routes
   if (
     user &&
     request.nextUrl.pathname.startsWith("/admin") &&
-    (!user.email?.endsWith("@besepa.com") ||
-      !user.email?.startsWith("mahamuduhalic2@gmail.com"))
+    profile?.role !== "admin"
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }

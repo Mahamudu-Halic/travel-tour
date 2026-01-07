@@ -1,14 +1,7 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { navlinks } from "@/lib/contants";
-import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
-import { Menu, Moon, Sun, User as UserIcon, X } from "lucide-react";
-import { User } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
-import { getCookie, setCookie } from "cookies-next";
-import { createClient } from "@/lib/supabase/client";
+import { Moon, Sun, User as UserIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,61 +10,56 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import SignInButton from "./sign-in-button";
+import MobileSidebar from "./mobile-sidebar";
+import LogoutButton from "./logout-button";
+import NavList from "./nav-list";
+import { createClient } from "@/lib/supabase/server";
 
-const Navbar = () => {
-  const pathname = usePathname();
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
-  const openMenu = () => {
-    setIsMenuOpen(true);
-    document.body.classList.add("overflow-hidden");
-  };
+const Navbar = async () => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    document.body.classList.remove("overflow-hidden");
-  };
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user?.id)
+    .single();
 
-  const toggleTheme = (currentTheme: "light" | "dark") => {
-    document.documentElement.classList.toggle("dark");
-    setCookie("theme", currentTheme, { maxAge: 60 * 60 * 24 * 30 });
-    setTheme(currentTheme);
-  };
+  // const pathname = usePathname();
+  // const [theme, setTheme] = useState<"light" | "dark">("light");
+  // const [user, setUser] = useState<User | null>(null);
+  // const router = useRouter();
 
-  const logout = async () => {
-    const supabase = await createClient();
-    await supabase.auth.signOut();
-    setUser(null);
-    router.refresh();
-  };
+  // const toggleTheme = (currentTheme: "light" | "dark") => {
+  //   document.documentElement.classList.toggle("dark");
+  //   setCookie("theme", currentTheme, { maxAge: 60 * 60 * 24 * 30 });
+  //   setTheme(currentTheme);
+  // };
 
-  useEffect(() => {
-    const getSavedTheme = async () => {
-      const savedTheme = (await getCookie("theme")) as "light" | "dark";
-      if (savedTheme) {
-        setTheme(savedTheme);
-        document.documentElement.classList.toggle(savedTheme);
-      }
-    };
+  // useEffect(() => {
+  //   const getSavedTheme = async () => {
+  //     const savedTheme = (await getCookie("theme")) as "light" | "dark";
+  //     if (savedTheme) {
+  //       setTheme(savedTheme);
+  //       document.documentElement.classList.toggle(savedTheme);
+  //     }
+  //   };
 
-    const getUser = async () => {
-      const supabase = await createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setUser(user);
-    };
+  //   const getUser = async () => {
+  //     const {
+  //       data: { user },
+  //     } = await supabase.auth.getUser();
 
-    // getSavedTheme();
-    getUser();
-  }, []);
+  //     if (user) {
+  //       setUser(user);
+  //     }
+  //   };
 
-  useEffect(() => {
-    const menuClose = () => closeMenu();
-    menuClose();
-  }, [pathname]);
+  //   // getSavedTheme();
+  //   getUser();
+  // }, []);
 
   return (
     <nav className="flex justify-between items-center w-full sticky top-0 z-1000 bg-white dark:bg-gray-900 backdrop-blur-3xl py-3 px-10">
@@ -85,30 +73,9 @@ const Navbar = () => {
         />
       </Link>
 
-      <ul className="hidden lg:flex justify-center items-center gap-5">
-        {navlinks.map((link) => (
-          <li key={link.name}>
-            <Link
-              href={link.href}
-              className={`hover:text-amber-600 font-semibold ${
-                pathname === link.href
-                  ? "text-amber-600 border-b border-amber-600"
-                  : "text-gray-500"
-              }`}
-            >
-              {link.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <NavList />
 
       <div className="flex items-center gap-2">
-        {/* <Button
-          variant="outline"
-          onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
-        >
-          {theme === "light" ? <Sun /> : <Moon />}
-        </Button> */}
         {user && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -134,67 +101,30 @@ const Navbar = () => {
               <DropdownMenuItem asChild>
                 <Link href="/dashboard/bookings">My Bookings</Link>
               </DropdownMenuItem>
-              {(user.email?.endsWith("@besepa.com") || user.email === "mahamuduhalic2@gmail.com") && (
+              {profile?.role === "admin" && (
                 <DropdownMenuItem asChild>
                   <Link href="/admin">Admin Panel</Link>
                 </DropdownMenuItem>
               )}
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Button
-                  variant="destructive"
-                  className="w-full hover:bg-red-500/90!"
-                  onClick={logout}
-                >
-                  Sign Out
-                </Button>
+                <LogoutButton />
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
+        {/* <Button
+          variant="outline"
+          onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
+        >
+          {theme === "light" ? <Sun /> : <Moon />}
+        </Button> */}
+
+        <MobileSidebar user={user} />
         <div className="hidden lg:flex justify-center items-center gap-2">
           {!user && <SignInButton />}
-          <Button className="bg-amber-600 hover:bg-amber-700">
-            Book Experience
-          </Button>
-        </div>
-
-        {isMenuOpen ? (
-          <Button className="lg:hidden" variant={"outline"} onClick={closeMenu}>
-            <X />
-          </Button>
-        ) : (
-          <Button className="lg:hidden" variant={"outline"} onClick={openMenu}>
-            <Menu />
-          </Button>
-        )}
-      </div>
-
-      <div
-        className={`lg:hidden fixed left-0 transition-all duration-300 space-y-5 ${
-          isMenuOpen ? "top-full" : "-top-[700px]"
-        } h-[calc(100vh-56px)] overflow-auto w-full bg-white dark:bg-gray-900 p-10 z-50`}
-      >
-        <ul className="flex flex-col gap-5">
-          {navlinks.map((link) => (
-            <li key={link.name}>
-              <Link
-                href={link.href}
-                className={`hover:text-amber-600 hover:bg-amber-600/10 block font-semibold p-2 transition-all duration-300 ${
-                  pathname === link.href
-                    ? "text-amber-600 border-b border-amber-600"
-                    : "text-gray-500"
-                }`}
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="flex flex-col gap-2">
-          {user ? <Button onClick={logout}>Sign Out</Button> : <SignInButton />}
-          <Button className="bg-amber-600 hover:bg-amber-700">
-            Book Experience
+          <Button asChild className="bg-amber-600 hover:bg-amber-700">
+            <Link href="/dashboard/bookings">Book Experience</Link>
           </Button>
         </div>
       </div>

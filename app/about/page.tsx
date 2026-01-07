@@ -2,7 +2,6 @@ import GetInTouch from "@/components/get-in-touch";
 import { Card, CardContent } from "@/components/ui/card";
 import { values } from "@/lib/contants";
 import Image from "next/image";
-import React from "react";
 
 const page = () => {
   return (

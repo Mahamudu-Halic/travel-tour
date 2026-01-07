@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { teams } from "@/lib/contants";
 import Image from "next/image";
 

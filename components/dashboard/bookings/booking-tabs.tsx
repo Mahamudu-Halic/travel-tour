@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
-import React from "react";
 import BookingCard from "./booking-card";
 import { BookingsType } from "./types";
 import { ToursType } from "@/components/tours/types";

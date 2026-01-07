@@ -1,3 +1,5 @@
+import { ToursType } from "@/components/tours/types";
+
 export interface BookingsType {
   id: string;
   user_id: string;
@@ -16,11 +18,5 @@ export interface BookingsType {
   refund_requested: boolean;
   created_at: string;
   updated_at: string;
-  tours: {
-    title: string;
-    slug: string;
-    destination: string;
-    image_url: string;
-    category: string;
-  };
+  tours: ToursType;
 }

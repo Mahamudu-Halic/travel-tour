@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { ArrowRight, Clock, MapPin, Users } from "lucide-react";
@@ -15,6 +14,7 @@ const FeaturedTours = async () => {
     .eq("is_featured", true)
     .eq("is_active", true)
     .limit(3);
+
 
   return (
     <section>

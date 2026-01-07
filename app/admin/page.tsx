@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import { Card, CardContent } from "@/components/ui/card";
-import { redirect } from "next/navigation";
 import { Users, MapPin, DollarSign, Calendar, Eye, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

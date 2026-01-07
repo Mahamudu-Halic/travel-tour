@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -15,7 +14,6 @@ const Introduction = () => {
         }
         alt="home"
         priority
-        quality={100}
         loading="eager"
         fill
         className="object-cover w-full h-full absolute top-0 left-0 z-0"
@@ -49,7 +47,7 @@ const Introduction = () => {
               variant="outline"
               className="text-lg px-8 bg-white/10 backdrop-blur-sm border-white hover:bg-white/20 text-white"
             >
-              <Link href="/book">Book an Experience</Link>
+              <Link href="/dashboard/bookings">Book an Experience</Link>
             </Button>
           </div>
         </div>

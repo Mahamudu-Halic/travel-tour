@@ -1,5 +1,4 @@
 import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
 import BookingTabs from "@/components/dashboard/bookings/booking-tabs";
 
 export default async function BookingsPage() {
@@ -9,14 +8,14 @@ export default async function BookingsPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect("/auth/login?redirect=/dashboard/bookings");
-  }
+  // if (!user) {
+  //   redirect("/auth/login?redirect=/dashboard/bookings");
+  // }
 
   const { data: allBookings } = await supabase
     .from("bookings")
     .select("*, tours(title, slug, destination, image_url, category)")
-    .eq("user_id", user.id)
+    .eq("user_id", user?.id)
     .order("created_at", { ascending: false });
 
   return (
