@@ -1,12 +1,40 @@
 import GetInTouch from "@/components/get-in-touch";
 import { Card, CardContent } from "@/components/ui/card";
-import { values } from "@/lib/contants";
+import { baseUrl, values } from "@/lib/contants";
+import type { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "About BESEPA | Ghana's Leading Eco-Culture Tourism Hub",
+  description:
+    "Learn about BESEPA - a Ghanaian eco-culture and tourism hub dedicated to authentic experiences, sustainable travel, and community empowerment.",
+  keywords:
+    "about BESEPA, Ghana tourism company, eco-tourism Ghana, cultural tourism, sustainable travel Ghana",
+  metadataBase: new URL(`${baseUrl}`),
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About BESEPA | Ghana Tourism Hub",
+    description:
+      "Discover our mission, vision, and values for authentic Ghana experiences",
+    type: "website",
+    url: "/about",
+    images: [
+      {
+        url: "https://i.postimg.cc/qMWTJhS1/empty.png",
+        width: 1200,
+        height: 630,
+        alt: "About BESEPA - Ghana Culture Heritage",
+      },
+    ],
+  },
+};
 
 const page = () => {
   return (
     <div>
-      <section className="relative py-24 bg-linear-to-br from-amber-50 to-green-50">
+      <section className="relative py-24 ">
         {/* <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent z-1" /> */}
         <Image
           src={"assets/images/Section (1).svg"}
@@ -17,7 +45,7 @@ const page = () => {
           fill
           className="object-cover w-full h-full absolute top-0 left-0 z-0"
         />
-        <div className="max-w-7xl relative z-2  px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-2">
           <div className="max-w-3xl  ">
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
               Who We Are
@@ -29,7 +57,7 @@ const page = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 bg-white">
         <div className="px-4 sm:px-6 lg:px-8 flex justify-between gap-4">
           <div className="prose prose-lg lg:w-1/2">
             <h2 className="text-xl md:text-3xl font-bold mb-3">

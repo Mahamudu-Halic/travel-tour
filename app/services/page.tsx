@@ -36,7 +36,7 @@ const page = () => {
   return (
     <div>
       <section className="relative py-24 bg-linear-to-br from-amber-50 to-green-50">
-        {/* <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent z-1" /> */}
+        <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent z-1" />
         <Image
           src={"assets/images/home-bg.svg"}
           alt="home"
@@ -48,10 +48,10 @@ const page = () => {
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl font-bold text-white mb-6">
               What We Do
             </h1>
-            <p className="text-xl text-gray-900">
+            <p className="text-xl text-white">
               Curated cultural, educational, and eco-tourism experiences
             </p>
           </div>
