@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { ProfileForm } from "@/components/profile-form";
 import { Card } from "@/components/ui/card";
-import { redirect } from "next/navigation";
+import { User } from "@supabase/supabase-js";
 
 export default async function Page() {
   const supabase = await createClient();
@@ -9,10 +9,6 @@ export default async function Page() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/auth/login?redirect=/dashboard/profile");
-  }
 
   return (
     <div className=" py-12 md:py-16">
@@ -27,7 +23,7 @@ export default async function Page() {
         </div>
 
         <Card className="border-border/50">
-          <ProfileForm user={user} />
+          <ProfileForm user={user as User} />
         </Card>
       </div>
     </div>

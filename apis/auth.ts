@@ -2,7 +2,6 @@ import { createClient } from "@/lib/supabase/client";
 
 export const login = async (redirect: string) => {
   const supabase = await createClient();
-  console.log("redirect", process.env.NEXT_PUBLIC_URL);
 
   await supabase.auth
     .signInWithOAuth({

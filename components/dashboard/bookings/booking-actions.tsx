@@ -37,7 +37,7 @@ const BookingActions = ({
         window.location.href = data.paystackAuthUrl;
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
