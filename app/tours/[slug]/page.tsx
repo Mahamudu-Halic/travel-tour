@@ -15,6 +15,52 @@ import {
 } from "lucide-react";
 import { notFound } from "next/navigation";
 import SignInButton from "@/components/sign-in-button";
+import type { Metadata } from "next";
+import { baseUrl } from "@/lib/contants";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const supabase = await createClient()
+  const { slug } = await params
+
+  const { data: tour } = await supabase.from("tours").select("*").eq("slug", slug).eq("is_active", true).single()
+
+  if (!tour) {
+    return {
+      title: "Tour Not Found",
+    }
+  }
+
+  return {
+    title: `${tour.title} | BESEPA Ghana Tours`,
+    description: tour.short_description,
+    keywords: `${tour.title}, ${tour.destination}, ${tour.category}, Ghana tour, cultural experience`,
+    metadataBase: new URL(`${baseUrl}`),
+    alternates: {
+      canonical: `/tours/${slug}`,
+    },
+    openGraph: {
+      title: tour.title,
+      description: tour.short_description,
+      type: "website",
+      url: `/tours/${slug}`,
+      images: [
+        {
+          url: tour.image_url ?? "https://i.postimg.cc/qMWTJhS1/empty.png",
+          width: 1200,
+          height: 630,
+          alt: tour.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: tour.title,
+      description: tour.short_description,
+      images: [tour.image_url ?? "https://i.postimg.cc/qMWTJhS1/empty.png"],
+    },
+  }
+}
+
 
 export default async function TourDetailPage({
   params,

@@ -3,7 +3,27 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { baseUrl } from "@/lib/contants";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact BESEPA | Ghana Tourism Hub",
+  description:
+    "Get in touch with BESEPA for tour inquiries, booking assistance, or general questions about our Ghana cultural and eco-tourism experiences.",
+  keywords:
+    "contact BESEPA, Ghana tourism contact, tour inquiry, booking assistance, customer support",
+  metadataBase: new URL(`${baseUrl}`),
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact BESEPA | Ghana Tourism Hub",
+    description: "Get in touch with our team for your Ghana tour inquiries",
+    type: "website",
+    url: "/contact",
+  },
+};
 
 const page = () => {
   return (

@@ -14,6 +14,8 @@ import {
   Crown,
 } from "lucide-react";
 
+export const baseUrl = process.env.NEXT_PUBLIC_URL;
+
 export const navlinks: { name: string; href: string }[] = [
   {
     name: "Home",

@@ -1,9 +1,36 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { services } from "@/lib/contants";
+import { baseUrl, services } from "@/lib/contants";
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "What We Do | BESEPA Eco-Culture & Tourism Hub Ghana",
+  description:
+    "Explore our complete collection of authentic cultural tours, eco-adventures, and heritage experiences across Ghana. Find your perfect tour today.",
+  keywords:
+    "Ghana tours, cultural experiences Ghana, eco-tourism packages, heritage tours, adventure tours Ghana, tour packages, book tours Ghana",
+  metadataBase: new URL(`${baseUrl}`),
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    title: "What We Do | BESEPA",
+    description: "Discover authentic Ghana tours and cultural experiences",
+    type: "website",
+    url: "/services",
+    images: [
+      {
+        url: "https://i.postimg.cc/rp6pXw1q/logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ghana Tours - BESEPA",
+      },
+    ],
+  },
+};
 
 const page = () => {
   return (

@@ -13,6 +13,35 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Clock, Users, ArrowRight, Search } from "lucide-react";
+import Empty from "@/components/empty";
+import type { Metadata } from "next";
+import { baseUrl } from "@/lib/contants";
+
+export const metadata: Metadata = {
+  title: "Browse All Tours | BESEPA Eco-Culture & Tourism Hub Ghana",
+  description:
+    "Explore our complete collection of authentic cultural tours, eco-adventures, and heritage experiences across Ghana. Find your perfect tour today.",
+  keywords:
+    "Ghana tours, cultural experiences Ghana, eco-tourism packages, heritage tours, adventure tours Ghana, tour packages, book tours Ghana",
+  metadataBase: new URL(`${baseUrl}`),
+  alternates: {
+    canonical: "/tours",
+  },
+  openGraph: {
+    title: "Browse All Tours | BESEPA",
+    description: "Discover authentic Ghana tours and cultural experiences",
+    type: "website",
+    url: "/tours",
+    images: [
+      {
+        url: "https://i.postimg.cc/rp6pXw1q/logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ghana Tours - BESEPA",
+      },
+    ],
+  },
+}
 
 export default async function ToursPage({
   searchParams,
@@ -204,9 +233,7 @@ export default async function ToursPage({
             </div>
           ) : (
             <div className="py-16 text-center">
-              <p className="text-lg text-muted-foreground">
-                No tours found matching your criteria.
-              </p>
+              <Empty message="No tours found matching your criteria." />
               <Button asChild variant="outline" className="mt-4 bg-transparent">
                 <Link href="/tours">View All Tours</Link>
               </Button>

@@ -1,5 +1,32 @@
-import { teams } from "@/lib/contants";
+import { baseUrl, teams } from "@/lib/contants";
+import type { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Our Team | BESEPA Eco-Culture & Tourism Hub Ghana",
+  description:
+    "Explore our team of professionals who bring together diverse expertise in cultural heritage, education, tourism management, and community development.",
+  keywords:
+    "Ghana tours, cultural experiences Ghana, eco-tourism packages, heritage tours, adventure tours Ghana, tour packages, book tours Ghana",
+  metadataBase: new URL(`${baseUrl}`),
+  alternates: {
+    canonical: "/team",
+  },
+  openGraph: {
+    title: "Our Team | BESEPA",
+    description: "Discover authentic Ghana tours and cultural experiences",
+    type: "website",
+    url: "/team",
+    images: [
+      {
+        url: "https://i.postimg.cc/rp6pXw1q/logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Our Team - BESEPA",
+      },
+    ],
+  },
+};
 
 const page = () => {
   return (
@@ -36,42 +63,41 @@ const page = () => {
         </div>
 
         <section className="">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div
-            
-            className="text-center mb-16"
-          >
-            <h2 className="font-heading text-4xl font-bold text-foreground mb-4">
-              A <span className="text-amber-600">Collaborative</span> Approach
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our team brings together diverse expertise united by a shared commitment to cultural preservation and authentic experiences.
-            </p>
-          </div>
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="font-heading text-4xl font-bold text-foreground mb-4">
+                A <span className="text-amber-600">Collaborative</span> Approach
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Our team brings together diverse expertise united by a shared
+                commitment to cultural preservation and authentic experiences.
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teams.map((section, index) => (
-              <div
-                key={section.title}
-              
-                className={`bg-card rounded-xl p-8 shadow-soft border border-border hover:border-secondary/30 transition-all duration-300 ${
-                  index === teams.length - 1 ? "md:col-span-2 lg:col-span-1" : ""
-                }`}
-              >
-                <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center mb-6">
-                  <section.icon className="w-7 h-7 text-secondary" />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {teams.map((section, index) => (
+                <div
+                  key={section.title}
+                  className={`bg-card rounded-xl p-8 shadow-soft border border-border hover:border-secondary/30 transition-all duration-300 ${
+                    index === teams.length - 1
+                      ? "md:col-span-2 lg:col-span-1"
+                      : ""
+                  }`}
+                >
+                  <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center mb-6">
+                    <section.icon className="w-7 h-7 text-secondary" />
+                  </div>
+                  <h3 className="font-heading text-xl font-semibold text-foreground mb-3">
+                    {section.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {section.description}
+                  </p>
                 </div>
-                <h3 className="font-heading text-xl font-semibold text-foreground mb-3">
-                  {section.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {section.description}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       </section>
 
       <section className="py-20 bg-gray-50">
