@@ -24,8 +24,8 @@ export default function Footer() {
                 className="w-auto h-auto object-cover relative z-10"
               />
               <div>
-                <div className="text-white font-bold">Besepa</div>
-                <div className="text-xs">Eco-Culture & Tourism</div>
+                <p className="text-white font-bold">Besepa</p>
+                <p className="text-xs">Eco-Culture & Tourism</p>
               </div>
             </div>
             <p className="text-sm leading-relaxed">

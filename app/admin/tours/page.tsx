@@ -1,9 +1,16 @@
 import { createClient } from "@/lib/supabase/server";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { AddTourForm } from "@/components/admin/add-tour-form";
-import { Edit2, Trash2 } from "lucide-react";
+import AddTourForm from "@/components/admin/add-tour-form";
 import Empty from "@/components/empty";
+import TourActions from "@/components/admin/tour-actions";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export default async function AdminToursPage() {
   const supabase = await createClient();
@@ -16,6 +23,17 @@ export default async function AdminToursPage() {
   return (
     <div className="py-12 md:py-16">
       <div className="container mx-auto max-w-7xl px-4">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/admin">Admin</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+            <BreadcrumbPage>Tours</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="mb-2 text-3xl font-bold text-balance md:text-4xl ">
@@ -66,7 +84,7 @@ export default async function AdminToursPage() {
                               nights
                             </span>
                             <span className="inline-flex items-center gap-1">
-                              <span className="font-medium">Price:</span>$
+                              <span className="font-medium">Price:</span>&#8373;
                               {tour.price}
                             </span>
                             <span
@@ -80,14 +98,7 @@ export default async function AdminToursPage() {
                             </span>
                           </div>
                         </div>
-                        <div className="flex gap-2 ml-4">
-                          <Button variant="outline" size="sm" disabled>
-                            <Edit2 className="h-4 w-4" />
-                          </Button>
-                          <Button variant="outline" size="sm" disabled>
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
+                        <TourActions tourId={tour.id} title={tour.title} />
                       </div>
                     ))
                   ) : (

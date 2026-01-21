@@ -3,9 +3,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ManageUsersForm } from "@/components/admin/manage-users-form";
 import { Shield, Mail, Calendar } from "lucide-react";
 import Empty from "@/components/empty";
-import { Button } from "@/components/ui/button";
 import Permission from "@/components/admin/permission";
-import { Badge } from "@/components/ui/badge";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export default async function AdminUsersPage() {
   const supabase = await createClient();
@@ -18,6 +24,17 @@ export default async function AdminUsersPage() {
   return (
     <div className="flex-1 bg-muted/30 py-12 md:py-16">
       <div className="container mx-auto max-w-7xl px-4">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/admin">Admin</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Users</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <div className="mb-8">
           <h1 className="mb-2 text-3xl font-bold text-balance md:text-4xl ">
             Manage Users
@@ -59,7 +76,7 @@ export default async function AdminUsersPage() {
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
                               <h3 className="font-semibold">
-                                {user.full_name ?? "Unnamed User"} 
+                                {user.full_name ?? "Unnamed User"}
                               </h3>
                               {isAdmin && (
                                 <span className="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">
@@ -81,9 +98,7 @@ export default async function AdminUsersPage() {
                               <div className="flex items-center gap-2">
                                 <Calendar className="h-4 w-4" />
                                 Joined{" "}
-                                {new Date(
-                                  user.created_at
-                                ).toLocaleDateString()}
+                                {new Date(user.created_at).toLocaleDateString()}
                               </div>
                             </div>
                           </div>

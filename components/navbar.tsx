@@ -31,12 +31,16 @@ const Navbar = async () => {
     <nav className="flex justify-between items-center w-full sticky top-0 z-1000 bg-white dark:bg-gray-900 backdrop-blur-3xl py-3 px-10">
       <Link href="/" className="flex items-center space-x-2">
         <Image
-          src="/assets/images/logo-md.jpg"
+          src="/assets/images/emblem.png"
           alt="BESEPA"
           width={120}
           height={48}
           className="h-10 w-auto"
         />
+        <div>
+          <p className="font-bold">Besepa</p>
+          <p className="text-xs">Eco-Culture & Tourism</p>
+        </div>
       </Link>
 
       <NavList />

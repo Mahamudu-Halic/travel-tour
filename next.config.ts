@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "i.postimg.cc",
       },
+      {
+        protocol: "https",
+        hostname:  "eokdffuwilmjinbwnseh.supabase.co",
+      },
+      {
+        protocol: "https",
+        hostname:  "khsnoxdzkbftjmdkfpho.supabase.co",
+      },
     ],
   },
 };

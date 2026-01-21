@@ -107,14 +107,16 @@ const RecentBookingsTable = async ({
                   <TableCell>
                     <Badge
                       className={`text-black ${
-                        booking.booking_status === "confirmed"
-                          ? "bg-amber-500/20"
-                          : booking.booking_status === "completed"
-                          ? "bg-green-600/20"
-                          : "bg-red-600/20"
+                        booking.refund_requested
+                          ? "bg-red-600/20"
+                          : booking.booking_status === "confirmed"
+                            ? "bg-amber-500/20"
+                            : booking.booking_status === "completed"
+                              ? "bg-green-600/20"
+                              : "bg-red-600/20"
                       }`}
                     >
-                      {booking.booking_status}
+                      {booking.refund_requested ? "Refund Requested" : booking.booking_status}
                     </Badge>
                   </TableCell>
                   <TableCell className="space-x-2">
